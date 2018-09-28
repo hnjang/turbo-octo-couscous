@@ -35,12 +35,12 @@ void list_del_entry(struct node * e) {
 
 struct node * reverse_list(struct node * head) {
 	struct node * src = head->prev;
-	struct node * res = malloc(sizeof(res));
+	struct node * res = malloc(sizeof(*res));
 	struct node * c;
 	init_list(res);
 	for (; src!=head; src = src->prev) {
 		//printf("%s: (%c) src:%p src->prev:%p\n",__func__, src->data, src, src->prev);
-		c = malloc(sizeof(c));
+		c = malloc(sizeof(*c));
 		c->data = src->data;
 		list_add_tail(c, res);
 	}
@@ -59,14 +59,14 @@ bool compare_list(struct node * a, struct node * b) {
 }
 
 struct node * str2list(char * str) {
-	struct node * head = malloc(sizeof(head));
+	struct node * head = malloc(sizeof(*head));
 	struct node * c;
 	//printf("%s: entry %s(%c)\n",__func__,str, *str);
 	init_list(head);
 	for (; *str!='\0'; str++) {
 		//printf("%s: (%c)\n",__func__, *str);
 		//getchar();
-		c = malloc(sizeof(c));
+		c = malloc(sizeof(*c));
 		c->data = *str;
 		list_add_tail(c, head);
 	}
