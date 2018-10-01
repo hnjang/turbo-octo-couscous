@@ -80,14 +80,14 @@ def countSquare(n, line, qc):
     result = 0
     for s in step:
         cur = qc
-        print('qc/s : %d/%d'%(qc,s))
         while True:
+            #print('qc/s/cur : %d/%d/%d'%(qc,s,cur))
             cur = cur + s
             if cur < 0 or cur >= n: break
             if line[cur]:
-                print('L8x. this will not be counted. there is a obstacle. ',cur)
+                #print('L8x. this will not be counted. there is a obstacle. ',cur)
                 break
-            print('L8x. this is counted',cur)
+            #print('L8x. this is counted',cur)
             result += 1
     return result
 
@@ -95,7 +95,7 @@ def countSquareDiag(n, line, q, step):
     result = 0
     for s in step:
         cur = q
-        print('q/s : ',(q,s))
+        #print('q/s : ',(q,s))
         while True:
             cur = [cur[x]+s[x] for x in range(2)]
             if cur[0] < 0 or (cur[1]<0): break
@@ -108,27 +108,29 @@ def countSquareDiag(n, line, q, step):
     return result
 
 def queensAttack(n,k,r_q,c_q, obstacles):
-    print('queensAttack: entry')
-    #board = [[False] * n for __ in range(n)]
+    #print('queensAttack: entry')
     rc_lines = [[False]*n for __ in range(2)]
     diag_lines = [[False]*n for __ in range(2)]
-    q = [r_q-1, r_q-1]
+    q = [r_q-1, c_q-1]
     q_diag = [sum(q), q[0]-q[1]+n-1]
     for o in obstacles:
+        #print('L118. o:', o)
         for i in range(2):
             if (o[i]-1)==q[i]:
-                rc_lines[i][q[(i+1)%2]-1] = True
+                j = (i+1)%2
+                rc_lines[i][o[j]-1] = True
+                #print('rc_lines[%d]: mark it as True.'%i,(o, i, o[j]-1))
         o_diag = [sum(o)-2, o[0]-o[1]+n-1]
         for i in range(2):
             if (o_diag[i]==q_diag[i]):
-                diag_lines[i][q[1]] = True
+                diag_lines[i][o[1]-1] = True
     count = 0
-    pprint(rc_lines)
-    pprint(diag_lines)
+    #pprint(rc_lines)
+    #pprint(diag_lines)
     for i in range(2):
-        print('count for rc lines (%d)'%i)
+        #print('count for rc lines (%d)'%i)
         count += countSquare(n, rc_lines[i], q[(i+1)%2])
-    print('count for diag lines')
+    #print('count for diag lines')
     step = [
             [[1,-1],[-1,1]],
             [[1,1],[-1,-1]]
