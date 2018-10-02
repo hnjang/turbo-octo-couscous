@@ -237,11 +237,32 @@ def timeInWords(h,m):
 
 def gridSearch(G, P, R, r):
     last_row = R - r # this is 0-based
+    C,c = len(G[0]),len(P[0])
     for i in range(last_row+1):
-        idx = G[i].find(P[0])
-        if idx==-1: continue
-        for j in range(1,len(P)):
-            if G[i+j]
+        idx_arr = []
+        cur = 0
+        while True:
+            idx = G[i][cur:].find(P[0])
+            if idx==-1: break
+            cur = cur+idx
+            idx_arr.append(cur)
+            #print('L247. i=%d, cur=%d, %s'%(i, cur, G[i]))
+            cur += 1
+        if (len(idx_arr)<=0): continue
+        for idx in idx_arr:
+            #print('L25x. i=%d, idx=%d, %s'%(i, idx, G[i]))
+            #pprint(G[i][idx:])
+            #print('L25x. idx=%d, c=%d C-1:%d'%(idx, c, C-1))
+            if idx+c-1 > C-1: continue
+            failed = False
+            for j in range(1,len(P)):
+                if G[i+j][idx:idx+c] != P[j]:
+                    failed = True
+                    break
+            if failed: continue
+            return 'YES'
+        # end of for-loop.
+    return 'NO'
 
 if __name__ == '__main__':
     t = int(input())
