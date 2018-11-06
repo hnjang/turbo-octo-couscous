@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <stdbool.h>
 #include <dirent.h>
@@ -16,7 +17,6 @@ struct my_proc {
 struct my_proc_group {
 	struct my_proc ** list;
 	int len;
-	//int buf_size;
 };
 
 bool true_filter(const struct my_proc * a) {
@@ -60,14 +60,13 @@ int scan_ps(struct my_proc ***ptr, bool (*filter)(const struct my_proc *)) {
             printf("%s: failed to open() (%d)\n",__func__, errno);
             continue;
         }
-        n = read(fd, buf, MAX_LEN_STR);
+        n = read(fd, buf, sizeof(buf)-1);
         if (0 == n) {
             // cmdline is empty. maybe kernel process.
             printf("%s: pid:%u cmdline is empty!\n",__func__, pid);
             close(fd);
             continue;
         }
-        n = (MAX_LEN_STR - 1) > n ? n : (MAX_LEN_STR - 1);
         buf[n] = '\0';
         close(fd);
 
@@ -125,7 +124,7 @@ int cleanup_proc_group(struct my_proc_group * pg) {
 	return 0;
 }
 
-int init_proc_group(struct my_proc_group * pg) {
+int init_proc_group(struct my_proc_group * pg, struct my_proc * item) {
 	pg->list = malloc(sizeof(*(pg->list)) * 1);
 	if (NULL == pg->list) {
         printf("%s: malloc failed(ps_list)\n",__func__);
@@ -136,8 +135,9 @@ int init_proc_group(struct my_proc_group * pg) {
         printf("%s: malloc failed(ps_list)\n",__func__);
 		goto failed;
 	}
+	pg->list[0]->pid = item->pid;
+	strncpy_v2(pg->list[0]->cmdline, item->cmdline, sizeof(item->cmdline));
 	pg->len = 1;
-	//pg->buf_len = 1;
 	return 0;
 failed:
 	free(pg->list);
@@ -157,16 +157,43 @@ int add_item_proc_group(struct my_proc_group * pg, struct my_proc * item) {
         printf("%s: malloc failed(ps_list)\n",__func__);
 		return -1;
 	}
+	pg->list[pg->len]->pid = item->pid;
+	strncpy_v2(pg->list[pg->len]->cmdline, item->cmdline, sizeof(item->cmdline));
 	pg->len += 1;
-	//pg->buf_len = 1;
 	return 0;
 
 }
 
+int print_proc_group(struct my_proc_group * pg) {
+	int i;
+	for(i=0; i<pg->len; i++) {
+		printf("%u, %s (0x%p)\n", pg->list[i]->pid, pg->list[i]->cmdline, pg->list[i]);
+	}
+}
+
+int comp_pg(const void * a, const void * b) {
+	return (*(struct my_proc **)a)->pid
+			- (*(struct my_proc **)b)->pid;
+}
+
+int sort_proc_group(struct my_proc_group * pg) {
+	bool sorted = true;
+	int i;
+	printf("%s: call qsort\n", __func__);
+	qsort(pg->list, pg->len, sizeof(pg->list[0]), comp_pg);
+	return 0;
+}
+
 int main(){
     int n;
+	int i;
     //struct my_proc ** ps_list;
 	struct my_proc_group g;
+	struct my_proc p_arr[] = {
+		{12, "a"},	{11, "b"},
+		{13, "c"},	{5, "d"},
+		{6, "e"},	{7, "f"},
+	};
 
     n = scan_ps(&g.list, true_filter);
     if (n<0) {
@@ -174,12 +201,22 @@ int main(){
         return -1;
     }
 	g.len = n;
-	//group.buf_size = n;
     printf("%s: n=%d\n", __func__, n);
-    while (n--) {
-        printf("%s: %u, %s\n", __func__, g.list[n]->pid, g.list[n]->cmdline);
-    }
+	print_proc_group(&g);
 	cleanup_proc_group(&g);
+
+    printf("\nTC #2 : original list\n");
+	init_proc_group(&g, &p_arr[0]);
+	for(i=1; i<6; i++){
+		add_item_proc_group(&g, &p_arr[i]);
+	}
+	print_proc_group(&g);
+
+	sort_proc_group(&g);
+    printf("\nTC #2 : sorted list\n");
+	print_proc_group(&g);
+	cleanup_proc_group(&g);
+
     return 0;
 }
 
