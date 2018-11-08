@@ -13,9 +13,9 @@ int main(int argc, const char *argv[])
 	};
     int a_size = sizeof(a)/sizeof(a[0]);
 	struct item b[] = {
-		{12, "a"},	{11, "b"},
+		{12, "a"},	{1, "x"},
 		{13, "c"},	{5, "d"},
-		{6, "e"},	{99, "z"},
+		{6, "e"},	{99, "y"},
 	};
     int b_size = sizeof(b)/sizeof(b[0]);
 

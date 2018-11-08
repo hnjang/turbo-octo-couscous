@@ -104,7 +104,7 @@ int update_list(struct item * arr, int size) {
 	for (int i=0; i<new_items.size(); i++) {
 		g_list.push_back(new_items[i]);
 	}
-	sort(v.begin(), v.end(), element::is_lower_id);
+	sort(g_list.begin(), g_list.end(), element::is_lower_id);
 	printf("%s:%d: sort() is done. now print g_list\n",__func__,__LINE__);
 	print_list(g_list);
 
@@ -137,13 +137,11 @@ int update_list_v2(vector<element> &v) {
 		}
 	}
 	// remove every element which 'remove' is true.
-	for (vector<element>::iterator it = g_list.begin(); it != g_list.end(); ++it) {
-		while (it != g_list.end()){
-			if (it->remove) {
-				g_list.erase(it);
-			} else {
-				break;
-			}
+	for (vector<element>::iterator it = g_list.begin(); it != g_list.end(); ) {
+		if (it->remove) {
+			g_list.erase(it);
+		} else {
+			++it;
 		}
 	}
 	// now, merge new_items to g_list
