@@ -3,7 +3,7 @@ CC 		= $(CROSS_COMPILE)gcc
 CXX		= $(CROSS_COMPILE)g++
 
 CFLAGS = -g
-CXXFLAGS = -g
+CXXFLAGS = -g -std=c++11
 
 TARGET = vector_ex
 

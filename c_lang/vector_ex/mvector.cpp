@@ -1,30 +1,45 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <sstream>
 #include <stdio.h>
 #include "common.h"
 #include "mvector.h"
 
 // every printf() is just a test code
 
-using namespace std;
+//using namespace std;
+using std::string;
+using std::vector;
 
 class element {
-public:
 	long long id;
 	string name;
-	int tail_length;
-	int weight;
-	bool remove;
-	static bool is_lower_id(element a, element b) {
-		return a.id < b.id;
+	int bmi; // body mass index
+	int max_bmi;
+public:
+	element(long long id, string name, int bmi) :
+		id{id}, name{name}, bmi{bmi}, max_bmi{bmi} {}
+	void update_max_bmi(const element &b) {
+		max_bmi = std::max(max_bmi, b.max_bmi);
 	}
-	static bool is_same(element a, element b) {
-		return (a.id == b.id) &&
-				(0 == a.name.compare(b.name));
+	bool is_smaller_max_bmi_than(const element &b) const {
+		return max_bmi < b.max_bmi;
 	}
-	static void print(element a) {
-		printf("%lld/%s\n", a.id, a.name.c_str());
+	string str() {
+		std::ostringstream ss;
+		ss << "id/name bmi(max) : " << id << '/' << name
+			<< ' ' << bmi << '(' << max_bmi << ")\n";
+		return ss.str();
+	}
+	bool operator<(const element &b) const {
+		return id < b.id;
+	}
+	bool operator==(const element &b) const {
+		return id == b.id && name == b.name;
+	}
+	void print() {
+		printf("%s", this->str().c_str() );
 	}
 };
 
@@ -33,9 +48,7 @@ static vector<element> g_list;
 
 int arr2vector(struct item * arr, int size, vector<element> &v) {
 	for(int i=0; i<size; i++){
-		element e;
-		e.id = arr[i].id;
-		e.name = string(arr[i].name);
+		element e {arr[i].id, string(arr[i].name), arr[i].bmi};
 		v.push_back(e);
 	}
 }
@@ -46,10 +59,10 @@ int find_element(element &e) {
 	int m;
 	while (l<=r) {
 		m = l + (r-l) / 2;
-		if (element::is_same(g_list[m], e)){
+		if (g_list[m] == e) {
 			return m;
 		}
-		if (element::is_lower_id(g_list[m], e))
+		if (g_list[m] < e)
 			l = m + 1;
 		else
 			r = m - 1;
@@ -60,7 +73,7 @@ int find_element(element &e) {
 int print_list(vector<element> &v) {
 	printf("%s:%d\n",__func__,__LINE__);
 	for(int i=0; i<v.size(); i++){
-		element::print(v[i]);
+		v[i].print();
 	}
 }
 
@@ -68,114 +81,76 @@ int update_list(struct item * arr, int size) {
 	vector<element> v;
 	vector<element> new_items;
 	arr2vector(arr, size, v);
-	//sort(v.begin(), v.end(), element::is_lower_id);
-	printf("%s:%d: print v\n",__func__,__LINE__);
-	print_list(v);
-	if (g_list.size() == 0) {
-		sort(v.begin(), v.end(), element::is_lower_id);
-		g_list = v;
-		printf("%s:%d: sort() is done. now print g_list\n",__func__,__LINE__);
-		print_list(g_list);
-		return 0;
-	}
-	for (int i=0; i<g_list.size(); i++) {
-		g_list[i].remove = true;
-	}
-	for (int i=0; i<v.size(); i++) {
-		int f = find_element(v[i]);
-		if (f>=0) {
-			g_list[f].remove = false;
-		} else {
-			new_items.push_back(v[i]);
-		}
-	}
-	// remove every element which 'remove' is true.
-	for (vector<element>::iterator it = g_list.begin(); it != g_list.end(); ++it) {
-		while (it != g_list.end()){
-			if (it->remove) {
-				printf("remove: size/it: %d/%d\n", g_list.size(), int(it - g_list.begin()));
-				element::print(g_list[it - g_list.begin()]);
-				g_list.erase(it);
-			} else {
-				break;
-			}
-		}
-	}
-	for (int i=0; i<new_items.size(); i++) {
-		g_list.push_back(new_items[i]);
-	}
-	sort(g_list.begin(), g_list.end(), element::is_lower_id);
-	printf("%s:%d: sort() is done. now print g_list\n",__func__,__LINE__);
-	print_list(g_list);
 
+	std::sort(v.begin(), v.end());
+	if (!g_list.empty()) {
+		for (int i=0; i<v.size(); i++) {
+			int f = find_element(v[i]);
+			if (f<0) continue;
+			if (g_list[f].is_smaller_max_bmi_than(v[i])){
+	            printf("max_bmi will be increased!\n");
+	            printf("old data:");
+				g_list[f].print();
+	            printf("new data:");
+				v[i].print();
+			}
+			v[i].update_max_bmi(g_list[f]);
+		}
+	}
+	std::swap(v, g_list);
+	print_list(g_list);
 }
 
 // update_list_v2() do below works.
-// - remove every element of g_list, if the element exists in v
-// - add a element to g_list, if a element exists in v and does not exist in g_list.
-// - if a element exists in v and in g_list, do something
+// - if a element exists in v and in g_list, print old data and new data
+//  and update max_bmi of the element of v
+// - finally, swap v with g_list
 //
 // this function have to maintain g_list and can be called repeatedly.
-int update_list_v2(vector<element> &v) {
-	vector<element> new_items;
-	if (g_list.size() == 0) {
-		sort(v.begin(), v.end(), element::is_lower_id);
-		g_list = v;
-		return 0;
-	}
-	// initialize 'remove'
-	for (int i=0; i<g_list.size(); i++) {
-		g_list[i].remove = true;
-	}
-	for (int i=0; i<v.size(); i++) {
-		int f = find_element(v[i]);
-		if (f>=0) {
-			g_list[f].remove = false;
-			// do_something
-		} else {
-			new_items.push_back(v[i]);
+void update_list_v2(vector<element> &v) {
+	std::sort(v.begin(), v.end());
+	if (!g_list.empty()) {
+		for (int i=0; i<v.size(); i++) {
+			int f = find_element(v[i]);
+			if (f<0) continue;
+			if (g_list[f].is_smaller_max_bmi_than(v[i])){
+	            printf("max_bmi will be increased!\n");
+	            printf("old data:");
+				g_list[f].print();
+	            printf("new data:");
+				v[i].print();
+			}
+			v[i].update_max_bmi(g_list[f]);
 		}
 	}
-	// remove every element which 'remove' is true.
-	for (vector<element>::iterator it = g_list.begin(); it != g_list.end(); ) {
-		if (it->remove) {
-			g_list.erase(it);
-		} else {
-			++it;
-		}
-	}
-	// now, merge new_items to g_list
-	for (int i=0; i<new_items.size(); i++) {
-		g_list.push_back(new_items[i]);
-	}
-	// finally, sort g_list
-	sort(g_list.begin(), g_list.end(), element::is_lower_id);
-
+	std::swap(v, g_list);
 }
 
 #ifdef USE_MV_MAIN
 int main(int argc, const char *argv[])
 {
-	int a_id[] = {12, 11, 13, 5, 6, 7};
-	const char * a_name[] = {"a", "b", "c", "d", "e", "f"};
-	int b_id[] = {12, 1, 13, 5, 6, 99};
-	const char * b_name[] = {"a", "x", "c", "d", "e", "y"};
-	vector<element> a, b;
-	for(int i=0; i<6; i++){
-		element x;
-		x.id = a_id[i];
-		x.name = string(a_name[i]);
-		a.push_back(x);
-	}
-	update_list_v2(a);
+    vector<element> a {
+        { 12, "a", 12 },
+        { 11, "b", 11 },
+        { 13, "c", 13 },
+        { 5, "d", 5 },
+        { 6, "e", 6 },
+        { 7, "f", 7 },
+    };
+    update_list_v2(a);
+    //std::copy(g_list.begin(), g_list.end(), std::ostream_iterator<element>{std::cout});
 	print_list(g_list);
-	for(int i=0; i<6; i++){
-		element x;
-		x.id = b_id[i];
-		x.name = string(b_name[i]);
-		b.push_back(x);
-	}
-	update_list_v2(b);
+
+    vector<element> b {
+        { 12, "a", 20 },
+        { 1, "x", 5 },
+        { 13, "c", 5 },
+        { 5, "d", 10 },
+        { 6, "e", 6 },
+        { 99, "y", 5 },
+    };
+    update_list_v2(b);
+    //std::copy(g_list.begin(), g_list.end(), std::ostream_iterator<element>{std::cout});
 	print_list(g_list);
 
 	return 0;

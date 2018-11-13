@@ -5,4 +5,5 @@
 struct item {
 	long long id;
 	char name[MAX_LEN];
+	int bmi;
 };
