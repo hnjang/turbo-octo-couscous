@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import sys, os
+import json
+#import pandas as pd
+from svg.charts import line
+from pprint import pprint
+
+if __name__ == "__main__":
+    print('Let\'s make a timeline')
+    if len(sys.argv)<2:
+        print ('please specify input json filename.')
+        sys.exit(0)
+    json_fname = sys.argv[1]
+    # read csv
+    with open(json_fname, 'r') as jf:
+        j = json.loads(jf.read())
+    p = j['periods']
+    for pp in p:
+        pprint(pp)
+

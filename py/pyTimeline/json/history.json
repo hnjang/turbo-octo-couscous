@@ -1,0 +1,34 @@
+{
+  "title" : "untiltled",
+  "start_year" : 1948,
+  "start_month" : 8,
+  "end_year" : 2018,
+  "end_month" : 8,
+  "periods" : [
+    {
+	  "name" : "1st and 2nd republic",
+	  "start_year" : 1948,
+	  "start_month" : 8,
+	  "end_year" : 1961,
+	  "end_month" : 5
+	},
+    {
+	  "name" : "Park",
+	  "direct_succeed" : true,
+	  "end_year" : 1979,
+	  "end_month" : 10
+	},
+    {
+	  "name" : "Chun",
+	  "direct_succeed" : true,
+	  "end_year" : 1988,
+	  "end_month" : 2
+	},
+    {
+	  "name" : "6th republic",
+	  "direct_succeed" : true,
+	  "end_year" : 2018,
+	  "end_month" : 8
+	}
+  ]
+}
