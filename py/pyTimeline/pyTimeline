@@ -3,9 +3,23 @@
 
 import sys, os
 import json
+import datetime
+import string
+import copy
 #import pandas as pd
 from svg.charts import line
 from pprint import pprint
+
+def get_gap(a,b):
+    print('entry: get_gap()')
+    print(a)
+    print(b)
+    if (a.year > b.year): return -1
+    if (a.year == b.year) and (a.month > b.month): return -1
+    ret = (13 - a.month) + b.month + 12*max((b.year - a.year -1), 0)
+    print( '%d/%d/%d'%((13 - a.month), b.month, (b.year - a.year -1)) )
+    print('ret: %d'%ret)
+    return ret
 
 if __name__ == "__main__":
     print('Let\'s make a timeline')
@@ -17,6 +31,18 @@ if __name__ == "__main__":
     with open(json_fname, 'r') as jf:
         j = json.loads(jf.read())
     p = j['periods']
+    dt = datetime.datetime(p[0]['start_year'], p[0]['start_month'], 1)
+    print(dt)
+    out = ''
+    ch_idx = 0
     for pp in p:
+        end_dt = datetime.datetime(pp['end_year'], pp['end_month'], 1)
+        gap = get_gap(dt, end_dt)
+        if gap<=0: sys.exit(-1) # maybe raise an exception
+        out = out + (gap-1)*string.ascii_uppercase[ch_idx]
+        dt = copy.copy(end_dt)
+        ch_idx = (ch_idx+1)%len(string.ascii_uppercase)
+
         pprint(pp)
+    print(out)
 
