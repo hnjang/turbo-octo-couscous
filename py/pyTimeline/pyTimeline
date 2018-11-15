@@ -6,9 +6,19 @@ import json
 import datetime
 import string
 import copy
-#import pandas as pd
-from svg.charts import line
+import svgwrite
 from pprint import pprint
+
+BOARD_WIDTH = 600
+BOARD_HEIGHT = 300
+MARGIN = 10
+CSS_STYLES = """
+    .guideline { stroke: gray; stroke-width: .1mm; fill: none}
+    .background { fill: lavenderblush; }
+    .line { stroke: firebrick; stroke-width: .1mm; }
+    .blacksquare { fill: indigo; }
+    .whitesquare { fill: hotpink; }
+"""
 
 def get_gap(a,b):
     print('entry: get_gap()')
@@ -22,6 +32,10 @@ def get_gap(a,b):
     return ret
 
 if __name__ == "__main__":
+    if svgwrite.version < (1,0,1):
+        print("This script requires svgwrite 1.0.1 or newer for internal stylesheets.")
+        sys.exit()
+
     print('Let\'s make a timeline')
     if len(sys.argv)<2:
         print ('please specify input json filename.')
@@ -34,15 +48,28 @@ if __name__ == "__main__":
     dt = datetime.datetime(p[0]['start_year'], p[0]['start_month'], 1)
     print(dt)
     out = ''
+    out_cnt = []
     ch_idx = 0
-    for pp in p:
+    for i,pp in enumerate(p):
         end_dt = datetime.datetime(pp['end_year'], pp['end_month'], 1)
         gap = get_gap(dt, end_dt)
         if gap<=0: sys.exit(-1) # maybe raise an exception
+        out_cnt.append(gap if i==0 or i==(len(p)-1) else gap-1)
         out = out + (gap-1)*string.ascii_uppercase[ch_idx]
         dt = copy.copy(end_dt)
         ch_idx = (ch_idx+1)%len(string.ascii_uppercase)
 
         pprint(pp)
     print(out)
+    pprint(out_cnt)
+    pprint([c/sum(out_cnt) for c in out_cnt])
+
+    dwg = svgwrite.Drawing('timeline.svg', size=(BOARD_WIDTH, BOARD_HEIGHT))
+    dwg.defs.add(dwg.style(CSS_STYLES))
+    dwg.add(dwg.rect(size=('100%','100%'), class_='guideline'))
+    dwg.add(dwg.rect(insert=(MARGIN, MARGIN),
+        size=(BOARD_WIDTH - 2*MARGIN, BOARD_HEIGHT - 2*MARGIN), class_='guideline'))
+    y = int( ((BOARD_HEIGHT - 2*MARGIN) *3 / 4) + MARGIN )
+    dwg.add(dwg.line(start=(0, y), end=('100%', y), class_='guideline') )
+    dwg.save()
 

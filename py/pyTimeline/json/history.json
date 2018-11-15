@@ -2,7 +2,7 @@
   "title" : "untiltled",
   "start_year" : 1948,
   "start_month" : 8,
-  "end_year" : 2018,
+  "end_year" : 2005,
   "end_month" : 8,
   "periods" : [
     {
@@ -27,7 +27,7 @@
     {
 	  "name" : "6th republic",
 	  "direct_succeed" : true,
-	  "end_year" : 2018,
+	  "end_year" : 2005,
 	  "end_month" : 8
 	}
   ]
