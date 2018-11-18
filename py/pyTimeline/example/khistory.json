@@ -1,0 +1,19 @@
+{
+    "width" : 750,
+    "start" : "1948",
+    "end" : "2005",
+    "num_ticks" : 10,
+    "tick_format" : "%Y",
+    "tick_orientation": "lr",
+    "date_parsing_format": "%Y",
+    "callouts" : [
+        ["Chun won in the 11th presidential election.", "1980"]
+	],
+    "eras" : [
+        ["1st and 2nd republic", "1948", "1961", "#CD3F85"],
+        ["", "1961", "1963", "#C00023"],
+        ["3rd and 4th republic", "1963", "1981", "#C0C000"],
+        ["5th republic", "1981", "1988", "#C000FF"],
+        ["6th republic", "1988", "2005", "#00C0FF"]
+    ]
+}
