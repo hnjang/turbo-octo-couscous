@@ -7,7 +7,13 @@
     "tick_orientation": "lr",
     "date_parsing_format": "%Y",
     "callouts" : [
-        ["Chun won in the 11th presidential election.", "1980"]
+        ["Coup of May Sixteenth", "1961"],
+        ["Coup of December Twelfth", "1979"],
+        ["Struggl of June", "1987"],
+        ["Roh Tae-woo became president", "1988"],
+        ["Kim Young-sam became president", "1993"],
+        ["Kim Dae-jung became president", "1998"],
+        ["Roh Moo-hyun became president", "2003"]
 	],
     "eras" : [
         ["1st and 2nd republic", "1948", "1961", "#CD3F85"],
