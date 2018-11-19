@@ -1,0 +1,28 @@
+{
+    "width" : 750,
+    "start" : "1501",
+    "end" : "1700",
+    "num_ticks" : 10,
+    "tick_format" : "%Y",
+    "tick_orientation": "lr",
+    "date_parsing_format": "%Y",
+	"font_size": "10pt",
+    "callouts" : [
+        ["De revolutionibus of Copernicus is published", "1543"],
+        ["Vesalius pioneered research into human anatomy", "1543"],
+        ["Tycho Brahe wrote and recorded accurate astronomical observations(70s)", "1570"],
+        ["Kepler completed laws about planetary motion", "1619"],
+        ["Boyle published law about pressure and volume of a gas", "1662"],
+        ["Hans Lippershey invented the telescope", "1608"],
+        ["Galileo observed Jupiter's moon", "1610"],
+        ["Descartes published La geometrie", "1637"],
+        ["Torricelli invented the mercury barometer", "1643"],
+        ["Newton discoverd that white light is a spectrum of a mixture of distinct coloured rays", "1672"],
+        ["Leibniz, Newton invented infinitesimal calculus", "1675"],
+        ["Newton published Principia", "1687"]
+	],
+    "eras" : [
+        ["16C", "1500", "1600", "#CD3F85"],
+        ["17C", "1600", "1700", "#C00023"]
+    ]
+}
