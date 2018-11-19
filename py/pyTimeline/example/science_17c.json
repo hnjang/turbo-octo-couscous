@@ -1,0 +1,24 @@
+{
+    "width" : 750,
+    "start" : "1601",
+    "end" : "1700",
+    "num_ticks" : 10,
+    "tick_format" : "%Y",
+    "tick_orientation": "lr",
+    "date_parsing_format": "%Y",
+	"font_size": "10pt",
+    "callouts" : [
+        ["Kepler completed laws about planetary motion", "1619"],
+        ["Boyle published law about pressure and volume of a gas", "1662"],
+        ["Hans Lippershey invented the telescope", "1608"],
+        ["Galileo observed Jupiter's moon", "1610"],
+        ["Descartes published La geometrie", "1637"],
+        ["Torricelli invented the mercury barometer", "1643"],
+        ["Newton discoverd that white light is a spectrum of a mixture of distinct coloured rays", "1672"],
+        ["Leibniz, Newton invented infinitesimal calculus", "1675"],
+        ["Newton published Principia", "1687"]
+	],
+    "eras" : [
+        ["17C", "1601", "1700", "#C00023"]
+    ]
+}

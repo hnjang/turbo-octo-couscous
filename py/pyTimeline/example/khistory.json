@@ -6,6 +6,7 @@
     "tick_format" : "%Y",
     "tick_orientation": "lr",
     "date_parsing_format": "%Y",
+	"zoom_ratio": "1.6",
     "callouts" : [
         ["Coup of May Sixteenth", "1961"],
         ["Coup of December Twelfth", "1979"],
