@@ -4,7 +4,7 @@ from DBcm import UseDatabase
 
 app = Flask(__name__)
 app.config['dbconfig'] = {
-    'host': '127.0.0.1',
+    'host': '192.168.219.149',
     'user': 'vsearch',
     'password': 'vsearchpasswd',
     'database': 'vsearchlogDB',
@@ -94,5 +94,5 @@ def view_the_log_file() -> 'html':
 			the_data=contents)
 	
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='192.168.219.149', port=5000)
 

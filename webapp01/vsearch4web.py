@@ -26,4 +26,4 @@ def entry_page() -> 'html':
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='192.168.219.149', port=5000)
