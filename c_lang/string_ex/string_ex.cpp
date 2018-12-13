@@ -1,13 +1,19 @@
 #include <vector>
+#include <string>
 #include <cstdint>
 #include <iostream>
 
 class my_length {
+	int id;
+	std::string name;
 	uint64_t v;		// unit is 'mm'
 	bool fmt_auto;
+
 	public:
-	my_length (uint64_t v) : v{v}, fmt_auto(false) {}
+	my_length (int id, std::string name, uint64_t v)
+		: id{id}, name{name}, v{v}, fmt_auto(false) {}
 	friend std::ostream &operator<<(std::ostream &out, const my_length &l) {
+		out << l.id << "/" << l.name << " : ";
 		if (!l.fmt_auto) {
 			return out << l.v << "mm";
 		} else {
@@ -30,11 +36,11 @@ bool need_fmt_auto(int x) {
 
 int main() {
 	std::vector<my_length> lengths;
-	my_length l{1};
+	my_length l{0, "a", 1};
 	lengths.push_back(l);
 	uint64_t val = 17;
-	for (int i=0; i<9; i++) {
-		my_length l{val};
+	for (int i=1; i<10; i++) {
+		my_length l{i, std::string(1, 'a'+i), val};
 		lengths.push_back(l);
 		val *= 10;
 	}
