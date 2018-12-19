@@ -47,6 +47,7 @@ bool is_end_tag(string str) {
 bool is_end_tag(string str, string tag_name) {
 	string s;
 	s = "/" + tag_name;
+	//cout << "is_end_tag: str/s: " << str << "/" << s << endl;
 	return s == str;
 }
 
@@ -62,16 +63,17 @@ bool is_valid(string str) {
 
 string get_tag_name(string str) {
 	size_t n = str.find(' ');
-	// cout << "get_tag_name: str:" <<str <<  "\tn=" << n <<endl;
+	//cout << "get_tag_name: str:" <<str <<  "\tn=" << n <<endl;
 	return str.substr(0, n);
 }
 
-element create_new_group(vector<string> &input, string first) {
+element create_new_group(vector<string> &input, string first, string tag_name) {
 	istringstream first_ss(first);
 	vector<string> first_tokens{istream_iterator<string>{first_ss},
 		istream_iterator<string>{}};
 	vector<string> attrs;
 	vector<string> values;
+	//cout << __LINE__ << " create_new_group: entry: " << tag_name << endl;
 	/*
 	cout << __LINE__ <<":create_new_group: entry: first_tokens.size(): " <<first_tokens.size()<<endl;
 	copy(first_tokens.begin(), first_tokens.end(), std::ostream_iterator<string>(cout, " "));
@@ -81,7 +83,7 @@ element create_new_group(vector<string> &input, string first) {
 		attrs.push_back(first_tokens[i]);
 		values.push_back(first_tokens[i+2]);
 	}
-	string tag_name;
+	string new_tag_name;
 	vector<element> children;
 	while (input.size() > 0) {
 		string buf = input[0];
@@ -89,18 +91,20 @@ element create_new_group(vector<string> &input, string first) {
 		//cout << "buf: " << buf << endl;
 		input.erase(input.begin());
 		if (is_start_tag(buf)) {
-			tag_name = get_tag_name(buf);
-			//cout << "\n\ntag: " << tag_name << endl;
-			element c = create_new_group(input, buf);
-			c.set_name(tag_name);
+			new_tag_name = get_tag_name(buf);
+			//cout << "L94 new_tag_name: " << new_tag_name << endl;
+			element c = create_new_group(input, buf, new_tag_name);
+			c.set_name(new_tag_name);
 			children.push_back(c);
 		} else {
 			//cout << "this must be a end tag : " << buf << endl;
+			//cout << "L100 tag_name: " << tag_name << endl;
 			if (is_end_tag(buf, tag_name))
 				break;
 		}
 	}
 	element res(attrs, values, children);
+	//cout << __LINE__ << " create_new_group: exit" << endl;
 	return res;
 }
 
@@ -195,18 +199,20 @@ int main() {
 		input.erase(input.begin());
 		if (is_start_tag(buf)) {
 			tag_name = get_tag_name(buf);
-			element c = create_new_group(input, buf);
+			//cout << "L199 tag_name: " << tag_name << endl;
+			element c = create_new_group(input, buf, tag_name);
 			c.set_name(tag_name);
 			root.children.push_back(c);
 		} else {
+			//cout << "L204 tag_name: " << tag_name << endl;
 			//cout << "this must be a end tag : " << buf << endl;
 			if (is_end_tag(buf, tag_name))
 				break;
 		}
 	}
 
-	cout << "\nStart dumping... " <<endl;
-	cout << root;
+	//cout << "\nStart dumping... " <<endl;
+	//cout << root;
 	for (int i=0; i<query.size(); i++) {
 		vector<string> t = split(query[i], ".");
 		vector<string> tt = split(t.back(), "~");
