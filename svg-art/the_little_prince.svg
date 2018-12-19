@@ -8,24 +8,37 @@
  </g>
  <g>
   <title>Layer 1</title>
-    <rect x="0" y="0" width="20" height="20" opacity="0" style="fill:black">
-    <animate id="a0" attributeType="CSS" attributeName="opacity" from="0" to="0" dur="1s" />
-  </rect>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_2" y="90" x="30" stroke-width="0" stroke="#000" fill="#000000" opacity="0">"What<animate id="a1" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a0.end"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_3" y="90" x="110" stroke-width="0" stroke="#000" fill="#000000" opacity="0">makes<animate id="a2" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a1.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_4" y="90" x="195" stroke-width="0" stroke="#000" fill="#000000" opacity="0">the<animate id="a3" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a2.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_5" y="90" x="241" stroke-width="0" stroke="#000" fill="#000000" opacity="0">desert<animate id="a4" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a3.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_6" y="90" x="322" stroke-width="0" stroke="#000" fill="#000000" opacity="0">beautiful,"<animate id="a5" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a4.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_9" y="160" x="30" stroke-width="0" stroke="#000" fill="#000000" opacity="0">said<animate id="a6" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a5.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_10" y="160" x="88" stroke-width="0" stroke="#000" fill="#000000" opacity="0">the<animate id="a7" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a6.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_11" y="160" x="134" stroke-width="0" stroke="#000" fill="#000000" opacity="0">little<animate id="a8" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a7.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_12" y="160" x="190" stroke-width="0" stroke="#000" fill="#000000" opacity="0">prince,<animate id="a9" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a8.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_13" y="230" x="30" stroke-width="0" stroke="#000" fill="#000000" opacity="0">"is<animate id="a10" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a9.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_14" y="230" x="70" stroke-width="0" stroke="#000" fill="#000000" opacity="0">that<animate id="a11" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a10.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_15" y="230" x="124" stroke-width="0" stroke="#000" fill="#000000" opacity="0">somewhere<animate id="a12" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a11.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_16" y="230" x="262" stroke-width="0" stroke="#000" fill="#000000" opacity="0">it<animate id="a13" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a12.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_17" y="230" x="288" stroke-width="0" stroke="#000" fill="#000000" opacity="0">hides<animate id="a14" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a13.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_18" y="230" x="358" stroke-width="0" stroke="#000" fill="#000000" opacity="0">a<animate id="a15" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a14.end+1s"/></text>
-  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_19" y="230" x="384" stroke-width="0" stroke="#000" fill="#000000" opacity="0">well..."<animate id="a16" attributeType="CSS" attributeName="opacity" from="0" to="1" fill="freeze" dur="0.1s" begin="a15.end+1s"/></text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_2" y="90" x="30" stroke-width="0" stroke="#000" fill="#000000" opacity="0">"What
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_3" y="90" x="110" stroke-width="0" stroke="#000" fill="#000000" opacity="0">makes
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_4" y="90" x="195" stroke-width="0" stroke="#000" fill="#000000" opacity="0">the
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_5" y="90" x="241" stroke-width="0" stroke="#000" fill="#000000" opacity="0">desert
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_6" y="90" x="322" stroke-width="0" stroke="#000" fill="#000000" opacity="0">beautiful,"
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_9" y="160" x="30" stroke-width="0" stroke="#000" fill="#000000" opacity="0">said
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_10" y="160" x="88" stroke-width="0" stroke="#000" fill="#000000" opacity="0">the
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_11" y="160" x="134" stroke-width="0" stroke="#000" fill="#000000" opacity="0">little
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_12" y="160" x="190" stroke-width="0" stroke="#000" fill="#000000" opacity="0">prince,
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_13" y="230" x="30" stroke-width="0" stroke="#000" fill="#000000" opacity="0">"is
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_14" y="230" x="70" stroke-width="0" stroke="#000" fill="#000000" opacity="0">that
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_15" y="230" x="124" stroke-width="0" stroke="#000" fill="#000000" opacity="0">somewhere
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_16" y="230" x="262" stroke-width="0" stroke="#000" fill="#000000" opacity="0">it
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_17" y="230" x="288" stroke-width="0" stroke="#000" fill="#000000" opacity="0">hides
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_18" y="230" x="358" stroke-width="0" stroke="#000" fill="#000000" opacity="0">a
+</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_19" y="230" x="384" stroke-width="0" stroke="#000" fill="#000000" opacity="0">well..."
+</text>
  </g>
 </svg>
