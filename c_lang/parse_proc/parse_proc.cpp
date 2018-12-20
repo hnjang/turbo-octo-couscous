@@ -24,22 +24,25 @@ bool readfile(std::string &filename, std::string &out, int count) {
 #define SUBSTR_BY_IDX(a)                                                       \
 	buf.substr(s_idx[(a)-1] + 1, s_idx[(a)] - s_idx[(a)-1] - 1)
 
-bool parse_proc(std::string &filename) {
+bool parse_proc(const std::string &filename) {
 	std::string buf;
 	std::ifstream ifs(filename);
 	if (!ifs.is_open())
 		return false;
 	getline(ifs, buf);
 
-	size_t first_space = buf.find(' ');
-	pid_t pid = stoi(buf.substr(0, first_space));
+	std::cout << buf << "\n";
+	size_t second_token = buf.find(' ') + 1;
+	pid_t pid = stoi(buf.substr(0, second_token - 1));
 	size_t r_paren = buf.find(')');
-	std::string comm = buf.substr(first_space + 2, r_paren - first_space - 2);
+	size_t third_token = buf.find(' ', r_paren + 1) + 1;
+	std::string comm = buf.substr(second_token, third_token - second_token - 1);
 
 	const int s_idx_len = 30;
 	std::array<std::string::size_type, s_idx_len> s_idx;
-	s_idx[0] = buf.find(' ', r_paren + 2);
-	std::cout << "(r_paren+2)/s_idx[0]: " << r_paren + 2 << "/" << s_idx[0] << "\n";
+	s_idx[0] = buf.find(' ', third_token);
+	std::cout << "third_token/s_idx[0]: " << third_token << "/" << s_idx[0]
+			  << "\n";
 	for (int i = 1; i < s_idx_len; i++) {
 		s_idx[i] = buf.find(' ', s_idx[i - 1] + 1);
 	}
@@ -48,18 +51,23 @@ bool parse_proc(std::string &filename) {
 			  std::ostream_iterator<std::string::size_type>(std::cout, " "));
 			  */
 	pid_t ppid = stoi(buf.substr(s_idx[0], s_idx[1]));
-	std::string state = buf.substr(r_paren + 2, s_idx[0] - (r_paren + 2));
+	std::string state = buf.substr(third_token, s_idx[0] - third_token);
+	unsigned long utime = stoul(SUBSTR_BY_IDX(11));
+	unsigned long stime = stoul(SUBSTR_BY_IDX(12));
 	unsigned long vsize = stoul(SUBSTR_BY_IDX(20));
 	unsigned long rss = stoul(SUBSTR_BY_IDX(21));
 	std::cout << pid << "/" << comm << "/" << state << "/" << ppid << "/"
-			  << vsize << "/" << rss << "\n";
+			  << vsize << "/" << rss << "\t" << utime << "/" << stime << "\n";
 	return true;
 }
 
 int main() {
-	std::string filename = "/proc/1/stat";
-	std::string out;
-	//readfile(filename, out, 100);
-	parse_proc(filename);
-	std::cout << out;
+	int cnt = 0;
+	for (int i = 1000; cnt < 20; i++) {
+		std::stringstream filename;
+		filename << "/proc/" << i << "/stat";
+		// readfile(filename, out, 100);
+		if (parse_proc(filename.str()))
+			cnt++;
+	}
 }
