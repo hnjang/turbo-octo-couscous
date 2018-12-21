@@ -36,7 +36,7 @@ bool parse_proc(const std::string &filename) {
 	pid_t pid = stoi(buf.substr(0, second_token - 1));
 	size_t r_paren = buf.find(')');
 	size_t third_token = buf.find(' ', r_paren + 1) + 1;
-	std::string comm = buf.substr(second_token, third_token - second_token - 1);
+	std::string comm = buf.substr(second_token + 1, third_token - second_token - 3);
 
 	const int s_idx_len = 30;
 	std::array<std::string::size_type, s_idx_len> s_idx;
