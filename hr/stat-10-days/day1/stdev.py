@@ -74,6 +74,8 @@ def interquartile_v2(n, x, f):
 if __name__ == '__main__':
     n = int(input())
     x = [int(__) for __ in input().split()]
-    f = [int(__) for __ in input().split()]
-    interquartile_v2(n, x, f)
+    pprint(x)
+    # print('%.1f'%st.mean(x))
+    # print('%.1f'%st.pvariance(x))
+    print('%.1f'%st.pstdev(x))
 
