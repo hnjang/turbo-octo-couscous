@@ -7,6 +7,7 @@ from functools import cmp_to_key
 from scipy import stats
 import numpy as np
 import statistics as st
+from sklearn import linear_model
 
 
 def median(v):
@@ -186,8 +187,34 @@ def spearman_rank_ccoeff(x, y):
     return 1 - 6 * sum(d2) / (len(x) * (len(x)**2 - 1))
 
 
+def predict_linear_model():
+    xl, y = [], []
+    for i in range(5):
+        t = [int(__) for __ in input().split()]
+        xl.append(t[0])
+        y.append(t[1])
+    x = np.asarray(xl).reshape(-1, 1)
+    # print(x)
+    lm = linear_model.LinearRegression()
+    lm.fit(x, y)
+    ret = lm.predict([[80]])
+    print('{:0.3f}'.format(ret[0]))
+
+
+def predict_linear_model_v2():
+    size = 5
+    x, y = [], []
+    for i in range(size):
+        t = [int(__) for __ in input().split()]
+        x.append(t[0])
+        y.append(t[1])
+    mean_x, mean_y = st.mean(x), st.mean(y)
+    x_squared = sum([xx**2 for xx in x])
+    xy = sum([x[i]*y[i] for i in range(size)])
+    b = (size*xy - sum(x)*sum(y)) / (size*x_squared - sum(x)**2)
+    a = mean_y - b * mean_x
+    print('{:0.3f}'.format(a+b*80))
+
+
 if __name__ == '__main__':
-    n = int(input())
-    x = [float(__) for __ in input().split()]
-    y = [float(__) for __ in input().split()]
-    print('{:0.3f}'.format(spearman_rank_ccoeff(x, y)))
+    predict_linear_model_v2()

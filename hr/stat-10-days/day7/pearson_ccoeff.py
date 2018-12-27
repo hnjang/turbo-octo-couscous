@@ -131,7 +131,7 @@ def clt2():
     nr_student = int(input())
     m_purchased = float(input())
     s_purchased = float(input())
-    s_purchased_sample = s_purchased * (nr_student ** 0.5)
+    s_purchased_sample = s_purchased * (nr_student**0.5)
     print('{0:0.4f}'.format(
         pnormal(m_purchased * nr_student, s_purchased_sample, nr_ticket)))
 
@@ -142,7 +142,7 @@ def clt3():
     s = int(input())
     range_percent = float(input())
     z = float(input())
-    sd_sample = s / (sample_size ** 0.5)
+    sd_sample = s / (sample_size**0.5)
     b = z * sd_sample + m
     a = (-z * sd_sample) + m
     print('{:0.2f}\n{:0.2f}'.format(a, b))
@@ -153,11 +153,11 @@ def clt3_spouy001():
     mean = float(input())
     sd = float(input())
     interval = float(input())
-    z = float (input())
+    z = float(input())
 
     sd_sample = sd / (samples**0.5)
-    print(round(mean - sd_sample*z,2))
-    print(round(mean + sd_sample*z,2))
+    print(round(mean - sd_sample * z, 2))
+    print(round(mean + sd_sample * z, 2))
 
 
 def pearson_ccoeff(x, y):
@@ -165,7 +165,7 @@ def pearson_ccoeff(x, y):
     s_x, s_y = st.pstdev(x), st.pstdev(y)
     acc = 0.0
     for i in range(len(x)):
-        acc += (x[i] - m_x)*(y[i] - m_y)
+        acc += (x[i] - m_x) * (y[i] - m_y)
     return acc / (len(x) * s_x * s_y)
 
 
@@ -174,4 +174,3 @@ if __name__ == '__main__':
     x = [float(__) for __ in input().split()]
     y = [float(__) for __ in input().split()]
     print('{:0.3f}'.format(pearson_ccoeff(x, y)))
-
