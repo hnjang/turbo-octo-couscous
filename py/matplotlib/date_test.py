@@ -7,7 +7,6 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from matplotlib.dates import DateFormatter
 
 import random
 
@@ -58,8 +57,13 @@ class PlotCanvas(FigureCanvas):
 
         ax = self.figure.add_subplot(111)
         ax.plot(dates, y_val)
-        # ax.fmt_xdata = DateFormatter('%y-%m-%d %H:%M')
-        ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M'))
+
+        use_major_formatter = True
+        fmt_str = '%m-%d %H:%M'
+        if use_major_formatter:
+            ax.xaxis.set_major_formatter(mdates.DateFormatter(fmt_str))
+        else:
+            ax.fmt_xdata = mdates.DateFormatter(fmt_str)
         self.figure.autofmt_xdate()
 
         ax.set_title('PyQt Matplotlib Example')
