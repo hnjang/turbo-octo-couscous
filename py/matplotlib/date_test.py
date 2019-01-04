@@ -12,6 +12,7 @@ import random
 
 import datetime as dt
 
+
 class App(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -51,8 +52,9 @@ class PlotCanvas(FigureCanvas):
         self.plot()
 
     def plot(self):
-        dates = mdates.drange(dt.datetime(2010, 1, 1), dt.datetime(2010,1,2),
-                      dt.timedelta(minutes=10))
+        dates = mdates.drange(
+            dt.datetime(2010, 1, 1), dt.datetime(2010, 1, 2),
+            dt.timedelta(minutes=10))
         y_val = [random.random() for i in range(len(dates))]
 
         ax = self.figure.add_subplot(111)
