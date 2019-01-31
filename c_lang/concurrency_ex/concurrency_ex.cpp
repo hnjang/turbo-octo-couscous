@@ -4,25 +4,24 @@
 #include <iterator>
 #include <algorithm>
 #include <vector>
-#include <initializer_list>
 #include <unistd.h>
 
 class C {
 	std::vector<int> v;
-	std::mutex mutex_;
+	mutable std::mutex mutex_;
 
   public:
 	C() {}
-	void Update(const std::vector<int> &new_v) {
+	void update(const std::vector<int> &new_v) {
 		std::lock_guard<std::mutex> lock(mutex_);
 		v = new_v;
 	}
-	bool Check(const int x){
+	bool check(int x) const {
 		std::lock_guard<std::mutex> lock(mutex_);
 		return std::find(v.begin(), v.end(), x) != v.end();
 	}
 	/* dump() is not essential */
-	void dump() {
+	void dump() const {
 		std::lock_guard<std::mutex> lock(mutex_);
 		std::cout << "dump: ";
 		std::copy(v.begin(), v.end(),
@@ -42,7 +41,7 @@ void updater_thread() {
 			v.push_back(rand() % 10 + 1);
 		}
 		std::sort(v.begin(), v.end());
-		g_c.Update(v);
+		g_c.update(v);
 		std::cout << "updated!!!\n";
 		std::copy(v.begin(), v.end(),
 				  std::ostream_iterator<int>(std::cout, " "));
@@ -52,12 +51,12 @@ void updater_thread() {
 }
 
 void reader_thread() {
-	std::vector<int> v {1,2,3,5};
+	std::vector<int> v{1, 2, 3, 5};
 	while (true) {
 		std::cout << "check: non-exist item: ";
-		for (int i = 0; i < v.size(); i++) {
-			if (!g_c.Check(v[i])){
-				std::cout <<  v[i] << " ";
+		for (int e : v) {
+			if (!g_c.check(e)) {
+				std::cout << e << " ";
 			}
 		}
 		std::cout << "\n";
