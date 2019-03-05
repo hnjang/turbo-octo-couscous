@@ -14,7 +14,6 @@ def get_translation_table():
         '''
     non_printable = [chr(i) for i in
             chain(range(ord('\t')), range(ord('\r')+1, ord(' ')), range(0x80, 0x100))]
-    pprint(non_printable)
     return str.maketrans('', '', ''.join(non_printable))
 
 
@@ -29,6 +28,11 @@ if len(sys.argv) < 2:
     sys.exit(-1)
 
 in_fname = sys.argv[1]
+only_pp = False
+try:
+    only_pp = True if sys.argv[2]=='only_pp' else False
+except:
+    pass
 pp_fname = in_fname + '.pp'
 
 no = 1
@@ -39,11 +43,15 @@ with open(in_fname, 'rb') as in_f:
     in_data_b = in_f.read()
     # convert bytes to string
     in_data = ''.join(map(chr, in_data_b))
-    print('type of in_data:', type(in_data))
+    # print('type of in_data:', type(in_data))
     out_data = in_data.translate(remap)
     print('## start to writing pp file: ', pp_fname)
     with open(pp_fname, 'w') as pp_f:
         pp_f.write(out_data)
+
+if only_pp:
+    print('only_pp is ture.')
+    sys.exit(0)
 
 with open(pp_fname) as pp_f:
     first_line = pp_f.readline()
