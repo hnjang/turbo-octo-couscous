@@ -1,14 +1,20 @@
 #!/usr/bin/python3
 
 import sys
+from itertools import chain
 from pprint import pprint
 
 
 def get_translation_table():
-    non_printable = \
-        [chr(i) for i in range(ord('\t'))] + \
-        [chr(i) for i in range(ord('\r') + 1, 0x20)] +\
-        [chr(i) for i in range(0x80, 0x100)]
+    '''
+    non_printable = [
+        chr(i) for i in range(ord('\t'))] + [
+        chr(i) for i in range(ord('\r') + 1, 0x20)] + [
+        chr(i) for i in range(0x80, 0x100)]
+        '''
+    non_printable = [chr(i) for i in
+            chain(range(ord('\t')), range(ord('\r')+1, ord(' ')), range(0x80, 0x100))]
+    pprint(non_printable)
     return str.maketrans('', '', ''.join(non_printable))
 
 
@@ -17,7 +23,6 @@ def write_output_file(contents, base_fname, no):
     print('write_output_file: start to writing: ', out_fname)
     with open(out_fname, 'w') as out_f:
         out_f.write(contents)
-
 
 if len(sys.argv) < 2:
     print('not enough arguments')
