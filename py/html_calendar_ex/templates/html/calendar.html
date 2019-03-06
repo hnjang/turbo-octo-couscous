@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="static/main.css">
+</head>
+<body>
+
+<!-- Header -->
+
+<!-- Grid -->
+<div class="row"> 
+
+{% for month in months%}
+<div class="column">
+
+<div class="month">      
+  <ul>
+    <li>
+		{{ month.name }}<br>
+    </li>
+  </ul>
+</div>
+
+<ul class="weekdays">
+	<li><font color="red">Su</font></li>
+  <li>Mo</li>
+  <li>Tu</li>
+  <li>We</li>
+  <li>Th</li>
+  <li>Fr</li>
+	<li><font color="blue">Sa</font></li>
+</ul>
+
+<ul class="days">
+  {% for day in month.days %}
+  <li>{{ day }}</li>
+  {% endfor %}
+</ul>
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
