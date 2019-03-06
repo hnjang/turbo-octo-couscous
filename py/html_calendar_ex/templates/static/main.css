@@ -66,15 +66,16 @@ body {
 
 .month ul li {
   color: black;
-  font-size: 20px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 3px;
   list-style-type: none;
+  font-weight: bold;
 }
 
 .weekdays {
   margin: 0;
-  padding: 2px 0;
+  padding: 0px 0;
   /*background-color: #ddd;*/
 }
 
@@ -88,7 +89,7 @@ body {
 }
 
 .days {
-  padding: 2px 0;
+  padding: 0px 0;
   /*background: #eee;*/
   margin: 0;
 }
@@ -111,7 +112,7 @@ body {
 }
 
 /* Add media queries for smaller screens */
-@media screen and (max-width:720px) {
+@media screen and (max-width:1000px) {
   .weekdays li, .days li {width: 11.1%;}
 }
 

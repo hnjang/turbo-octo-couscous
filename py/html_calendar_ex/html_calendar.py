@@ -12,7 +12,9 @@ def mkdir_helper(dname):
     try:
         os.mkdir(dname)
     except FileExistsError:
-        # keep silent
+        print('remove {} and create it again...'.format(dname))
+        os.system('rm -rf {}'.format(dname))
+        os.mkdir(dname)
         pass
     print('Created {}'.format(dname))
 
