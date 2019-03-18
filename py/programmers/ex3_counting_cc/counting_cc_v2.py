@@ -13,8 +13,11 @@ class Graph:
     def clear_visited(self):
         self.visited = [False for i in range(self.V)]
 
-    def is_active(self, v):
+    def get_vertex_stat(self, v):
         return self.active_vertex[v]
+
+    def set_vertex_stat(self, v, val):
+        self.active_vertex[v] = val
 
     def component(self, v):
         self.visited[v] = True
@@ -34,7 +37,7 @@ class Graph:
         cc = []
         self.clear_visited()
         for v in range(self.V):
-            if self.visited[v] == False and self.is_active(v):
+            if self.visited[v] == False and self.get_vertex_stat(v):
                 cc.append(self.component(v))
         return cc
 
@@ -52,24 +55,19 @@ def solution(image):
             if 0 == img[i][j]:
                 continue
             curr = (i - 1) * c + (j - 1)
-            g.active_vertex[curr] = True
+            g.set_vertex_stat(curr, True)
             if img[i][j + 1]: g.addEdge(curr, curr + 1)
-            if img[i][j - 1]: g.addEdge(curr, curr - 1)
             if img[i + 1][j]: g.addEdge(curr, curr + c)
             if img[i - 1][j]: g.addEdge(curr, curr - c)
     # pprint(g.adj)
     cc1 = g.connectedComponents()
     #pprint(cc1)
-    # g = Graph(r * c)
     for i in range(1, r + 1):
         for j in range(1, c + 1):
             if 0 == img[i][j]:
                 continue
             curr = (i - 1) * c + (j - 1)
-            g.active_vertex[curr] = True
-            if img[i][j + 1]: g.addEdge(curr, curr + 1)
-            if img[i + 1][j]: g.addEdge(curr, curr + c)
-            if img[i - 1][j]: g.addEdge(curr, curr - c)
+            g.set_vertex_stat(curr, True)
             if img[i + 1][j + 1]: g.addEdge(curr, curr + c + 1)
             if img[i + 1][j - 1]: g.addEdge(curr, curr + c - 1)
     # pprint(g.adj)
