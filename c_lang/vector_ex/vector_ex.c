@@ -4,6 +4,7 @@
 
 extern int update_list(struct item * arr, int size);
 
+#ifndef USE_MV_MAIN
 int main(int argc, const char *argv[])
 {
 	struct item a[] = {
@@ -30,3 +31,4 @@ int main(int argc, const char *argv[])
 
     return 0;
 }
+#endif

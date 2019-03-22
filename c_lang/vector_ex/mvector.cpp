@@ -116,11 +116,13 @@ void update_list_v2(vector<element> &v) {
 		}
 	}
 	std::swap(v, g_list);
+	// abort();
 }
 
 #ifdef USE_MV_MAIN
 int main(int argc, const char *argv[])
 {
+	printf("run main() of mvector.cpp\n");
 	vector<element> a {
 		{ 12, "a", 12 },
 		{ 11, "b", 11 },

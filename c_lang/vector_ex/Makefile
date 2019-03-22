@@ -2,8 +2,9 @@
 CC 		= $(CROSS_COMPILE)gcc
 CXX		= $(CROSS_COMPILE)g++
 
-CFLAGS = -g
-CXXFLAGS = -g -std=c++11
+CFLAGS = -g $(CCXXFLAGS)
+#CXXFLAGS = -g -ggdb -std=c++11 $(CCXXFLAGS)
+CXXFLAGS = -g -std=c++11 $(CCXXFLAGS)
 
 TARGET = vector_ex
 
