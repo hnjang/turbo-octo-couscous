@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 struct ApplicationState {
+	int x;
     struct {
         bool use_crash_handler;
         bool use_abort_handler;
