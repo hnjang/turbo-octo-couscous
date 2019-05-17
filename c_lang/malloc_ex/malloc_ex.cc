@@ -42,7 +42,7 @@ int alloc_lock() {
 	const size_t sz_1m = 1024 * 1024;
 	char * buf = (char *)malloc(sz_1m*size);
 	if (!buf) {
-		cout << "malloc failed. buf=" << buf << "\n";
+		cout << "malloc failed.\n";
 	}
 	int ret = mlock(buf, sz_1m*size);
 	if (ret) {
