@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
-import sys
 from collections import deque
-
+import argparse
 
 def search(lines, pattern, history=5):
     prev_lines = deque(maxlen=history)
@@ -13,14 +12,18 @@ def search(lines, pattern, history=5):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("pattern")
+    parser.add_argument("filename")
+    args = parser.parse_args()
+    '''if len(sys.argv) < 3:
         print('not enough argument')
         sys.exit(-1)
     pattern = sys.argv[1]
-    fname = sys.argv[2]
-    print('pattern: {}, filename: {}'.format(pattern, fname))
-    with open(fname) as f:
-        for line, prevlines, no in search(f, pattern, 2):
+    fname = sys.argv[2]'''
+    print('pattern: {}, filename: {}'.format(args.pattern, args.filename))
+    with open(args.filename) as f:
+        for line, prevlines, no in search(f, args.pattern, 2):
             print('Ln: {}'.format(no) + '-' * 20)
             for pline in prevlines:
                 print(pline, end='')
