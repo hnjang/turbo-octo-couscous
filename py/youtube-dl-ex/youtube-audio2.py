@@ -7,10 +7,16 @@ from pprint import pprint
 rl = lambda: sys.stdin.readline().strip()
 I = lambda: int(rl())
 
-n = I()
+n = rl()
+if n==None or n=='':
+    n = 987654321
 l = []
 for i in range(n):
-    l.append(rl())
+    t = rl()
+    if 'https://youtu' in t:
+        l.append(t)
+    else:
+        break
 
 pprint(l)
 
