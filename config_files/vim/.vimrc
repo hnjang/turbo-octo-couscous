@@ -5,6 +5,7 @@ set nocompatible
 filetype off
 
 " TODO: Load plugins here (pathogen or vundle)
+execute pathogen#infect('bundle/{}')
 
 " Turn on syntax highlighting
 syntax on
