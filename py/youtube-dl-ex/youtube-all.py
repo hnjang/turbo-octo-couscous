@@ -22,8 +22,8 @@ except:
     pass
 os.chdir(TMP_DIR)
 for ll in l:
-    print('youtube-dl \'bestvideo[height<=480]+bestaudio/best[height<=480]\' %s'%(ll))
-    os.system('youtube-dl \'bestvideo[height<=480]+bestaudio/best[height<=480]\' %s'%(ll))
+    print('youtube-dl -f \'bestvideo[height<=480]+bestaudio/best[height<=480]\' %s'%(ll))
+    os.system('youtube-dl -f \'bestvideo[height<=480]+bestaudio/best[height<=480]\' %s'%(ll))
     g = glob.glob('*.m4a')
     if len(g)<=0: continue
 
