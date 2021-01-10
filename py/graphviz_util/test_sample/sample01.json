@@ -1,11 +1,11 @@
 {
  "contents":[
+ {"type":"link","nodes":["start","a"]},
+ {"group":"comment","type":"comment","node":"a","comment":"this is a"},
  {"type":"link","nodes":["a","b"]},
- {"type":"comment","node":"b","comment":"this is b"},
- {"type":"link","nodes":["b","c"]},
- {"type":"comment","node":"c","comment":"this is c"},
- {"type":"link","nodes":["c","d"]},
- {"type":"comment","node":"d","comment":"this is d"} 
-
+ {"group":"comment","type":"comment","node":"b","comment":"this is b"},
+ {"type":"switch","nodes":["b","apple","orange","blueberry"],"labels":["red","orange","violet"]},
+ {"type":"end-switch","nodes":["apple","orange","blueberry","eat"]},
+ {"type":"link","nodes":["eat","end"]}
  ]
 }

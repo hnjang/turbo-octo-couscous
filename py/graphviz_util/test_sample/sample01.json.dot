@@ -1,12 +1,18 @@
+digraph {
+  start -> a
   a -> b
-  b -> c
-  c -> d
+  b -> apple[label="red"]
+  b -> orange[label="orange"]
+  b -> blueberry[label="violet"]
+  apple -> eat
+  orange -> eat
+  blueberry -> eat
+  eat -> end
 
-#now, here is comments
+#now, here are comments
 
+  a -> a_cmt[arrowhead="none"]
+  a_cmt[label="this is a"]
   b -> b_cmt[arrowhead="none"]
   b_cmt[label="this is b"]
-  c -> c_cmt[arrowhead="none"]
-  c_cmt[label="this is c"]
-  d -> d_cmt[arrowhead="none"]
-  d_cmt[label="this is d"]
+}
