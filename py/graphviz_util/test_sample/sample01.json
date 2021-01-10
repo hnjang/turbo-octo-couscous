@@ -1,0 +1,11 @@
+{
+ "contents":[
+ {"type":"link","nodes":["a","b"]},
+ {"type":"comment","node":"b","comment":"this is b"},
+ {"type":"link","nodes":["b","c"]},
+ {"type":"comment","node":"c","comment":"this is c"},
+ {"type":"link","nodes":["c","d"]},
+ {"type":"comment","node":"d","comment":"this is d"} 
+
+ ]
+}

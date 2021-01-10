@@ -1,0 +1,12 @@
+  a -> b
+  b -> c
+  c -> d
+
+#now, here is comments
+
+  b -> b_cmt[arrowhead="none"]
+  b_cmt[label="this is b"]
+  c -> c_cmt[arrowhead="none"]
+  c_cmt[label="this is c"]
+  d -> d_cmt[arrowhead="none"]
+  d_cmt[label="this is d"]
