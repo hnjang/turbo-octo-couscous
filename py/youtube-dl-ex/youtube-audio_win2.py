@@ -4,6 +4,8 @@ import os
 import glob
 from pprint import pprint
 
+ytdlp_bin = r'D:\\download\\yt-dlp'
+
 rl = lambda: sys.stdin.readline().strip()
 I = lambda: int(rl())
 
@@ -32,8 +34,9 @@ except:
     pass
 os.chdir(TMP_DIR)
 for ll in l:
-    print('youtube-dl -f 140 %s'%(ll))
-    os.system('youtube-dl  -f 140 %s'%(ll))
+    cmd = '%s --verbose -f 140 %s'%(ytdlp_bin, ll)
+    print(cmd)
+    os.system(cmd)
     g = glob.glob('*.m4a')
     if len(g)<=0: continue
     continue
